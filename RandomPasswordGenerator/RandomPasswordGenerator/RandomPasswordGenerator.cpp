@@ -1,5 +1,6 @@
-// RandomPasswordGenerator.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
-//
+
+//Licensed under MIT License - © Patrick Temborius 2024
+
 #include <random> 
 #include <iostream>
 #include <string>
@@ -11,14 +12,12 @@ class PasswordGenerator
 {
 private:
     std::random_device randomDevice;
-    double entropyValue;
     bool hasEntropy;
 
 public:
     PasswordGenerator()
     {
-        entropyValue = randomDevice.entropy();
-        hasEntropy = entropyValue > 0;
+        hasEntropy = randomDevice.entropy() > 0;
         if (hasEntropy)
         {
             std::cout << "Using real random number generator." << std::endl;
@@ -36,11 +35,13 @@ public:
 
         std::mt19937 gen(randomDevice());
 
-        std::string password(length, '\0'); // Preallocate for efficiency
-        std::ranges::generate(password, [&]() {
+        // Preallocate for efficiency
+        std::string password(length, '\0'); 
+        std::ranges::generate(password, [&]() 
+        {
             // Prefer the hardware random number generator, otherwise fallback to engine
             return characters[hasEntropy ? dist(randomDevice) : dist(gen)];
-            });
+        });
 
         // Shuffle using ranges
         std::ranges::shuffle(password, std::mt19937(randomDevice()));
@@ -59,7 +60,7 @@ int main()
     std::cin >> passwordLength;
 
     int passwordAmount;
-    std::cout << "Enter how many passwords should be generated: ";
+    std::cout << "Enter amount of passwords to be generated: ";
     std::cin >> passwordAmount;
 
     for (int i = 0; i < passwordAmount; ++i) 
