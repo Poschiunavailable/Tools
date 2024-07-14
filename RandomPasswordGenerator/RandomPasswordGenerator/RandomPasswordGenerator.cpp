@@ -67,6 +67,7 @@ int main()
         std::string password = passwordGenerator.generatePassword(passwordLength);
         std::cout << password << "\n";
     }
+    std::cin.get();
 
     std::cout << std::endl << "Press any key to exit...";
     std::cin.get(); // Waits for the user to press Enter (or any other key)
