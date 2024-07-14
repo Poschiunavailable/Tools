@@ -26,7 +26,5 @@
 *.a
 *.lib
 
-# Executables
-*.exe
-*.out
-*.app
+RandomPasswordGenerator/.vs
+RandomPasswordGenerator/RandomPasswordGenerator/x64
